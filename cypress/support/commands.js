@@ -1,25 +1,15 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('login', () => {
+    cy.visit('/ords/r/sete/maestro/login?tz=-3:00')
+
+    cy.get('[name="P9999_USERNAME"]').type('Eduarda.marques')
+    cy.get('[name="P9999_PASSWORD"]').type('Sete@1403')
+    cy.get('#acessar').click();
+
+    cy.get(':nth-child(6) > .t-Card > .t-Card-wrap').click()
+})
+
+Cypress.Commands.add('acessarCursosCriados', () => {
+    cy.get('#t_MenuNav_4i').click()
+    cy.get('[aria-hidden="true"][tabindex="-1"] > .a-Icon').click()
+    cy.contains('Cursos criados').click({ force: true })
+})
